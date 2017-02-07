@@ -4,7 +4,7 @@ exports.handler = (event, context, callback) => {
 
 AWS.config.update({
   region: "eu-central-1",
-  endpoint: "https://dynamodb.eu-central-1:8000"
+  endpoint: "dynamodb.eu-central-1.amazonaws.com"
 });
 
 var docClient = new AWS.DynamoDB.DocumentClient();
@@ -30,4 +30,4 @@ docClient.put(params, function(err, data) {
     }
 });
 
-}
+};
