@@ -12,10 +12,10 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 var table = "endleg-main";
 var user = "hashstringreallylonglikethis";
 var card1 = "A";
-var card1 = "B";
-var card1 = "C";
-var card1 = "D";
-var card1 = "E";
+var card2 = "B";
+var card3 = "C";
+var card4 = "D";
+var card5 = "E";
 var name = "Nick";
 var flag = 1;
 
