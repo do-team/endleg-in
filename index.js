@@ -32,7 +32,7 @@ var params = {
         "card5": card5,
     }
 };
-
+console.log(event);
 console.log("Adding a new item...");
 docClient.put(params, function(err, data) {
     if (err) {
