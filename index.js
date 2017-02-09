@@ -10,14 +10,26 @@ AWS.config.update({
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 var table = "endleg-main";
-var user = "test";
-var name = "Dave";
+var user = "hashstringreallylonglikethis";
+var card1 = "A";
+var card1 = "B";
+var card1 = "C";
+var card1 = "D";
+var card1 = "E";
+var name = "Nick";
+var flag = 1;
 
 var params = {
     TableName:table,
     Item:{
         "user": user,
-        "name": name
+        "name": name,
+        "fightflag": flag,
+        "card1": card1,
+        "card2": card2,
+        "card3": card3,
+        "card4": card4,
+        "card5": card5,
     }
 };
 
