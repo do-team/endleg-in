@@ -4,19 +4,19 @@ exports.handler = (event, context, callback) => {
 
 AWS.config.update({
   region: "eu-central-1",
-  endpoint: "dynamodb.eu-central-1.amazonaws.com"
+  endpoint: "http://localhost:8000"
 });
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-var table = "endleg-main";
-var user = "hashstringreallylonglikethis";
+var table = "users";
+var user = "davesade";
 var card1 = "A";
 var card2 = "B";
 var card3 = "C";
 var card4 = "D";
 var card5 = "E";
-var name = "Nick";
+var name = "dave";
 var flag = 1;
 
 var params = {
