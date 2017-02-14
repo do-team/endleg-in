@@ -8,31 +8,32 @@ AWS.config.update({
 
 var dynamodb = new AWS.DynamoDB();
 
-var incoming = JSON.parse(fs.readFileSync('testevent.json', 'utf8'));
-//console.log(incoming);
 
-incoming.forEach(function(user) {
+var incoming = JSON.parse(fs.readFileSync('testevent.json', 'utf-8'));
+console.log(incoming);
 
 var params = {
         TableName: "users",
         Item: {
-            "user": user.user,
-            "name": user.name,
-            "card1":  user.card1,
-            "fighflag": user.fightflag
+            "user": incoming.user,
+            "name": incoming.name,
+            "card1":  incoming.card1,
+            "fighflag": incoming.fightflag
         }
     };
+
+
 var docClient = new AWS.DynamoDB.DocumentClient();
-console.log(params);
+
 docClient.put(params, function(err, data) {
        if (err) {
            console.log(err);
-           console.error("Unable to add user", user.user, ". Error JSON:", JSON.stringify(err, null, 2));
+           console.error("Unable to add user", incoming.user, ". Error JSON:", JSON.stringify(err, null, 2));
        } else {
-           console.log("PutItem succeeded, user", user.user, " added.");
+           console.log("PutItem succeeded, user", incoming.user, " added.");
        }
     });
-});
+
 
 
 

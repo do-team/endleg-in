@@ -1,14 +1,6 @@
-[
 {
   "user" : "qwertasdfg",
   "name" : "davesade",
   "card1" : "rock",
   "fightflag" : 1
-},
-{
-  "user" : "zxcvbnm",
-  "name" : "stan",
-  "card1" : "paper",
-  "fightflag" : 1
 }
-]
