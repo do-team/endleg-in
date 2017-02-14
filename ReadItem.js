@@ -13,7 +13,7 @@ console.log(incoming);
 
 var params = {
         TableName: "users",
-        Item: {
+        Key: {
             "user": incoming.user,
             "name": incoming.name
         }
