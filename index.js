@@ -9,7 +9,7 @@ var token = zkouska.sectoken;
 console.log('token: ', token);
 
 var budouciusername = nJwt.verify(token, "secret", 'HS512');
-console.log(budouciusername);
+console.log(budouciusername.cognito:username);
 
 AWS.config.update({
   region: "eu-central-1",
