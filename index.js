@@ -1,6 +1,5 @@
 var AWS = require("aws-sdk");
 var nJwt = require('njwt');
-var JSON = require('json2');
 
 exports.handler = (event, context, callback) => {
 
@@ -12,9 +11,11 @@ console.log('token: ', token);
 nJwt.verify(token,"secret",function(err,verifiedJwt){
   if(err){
     console.log('CHYBA', err); // Token has expired, has been tampered with, etc
-    console.log (err.parsedBody);
-    var obj = JSON.parse(err);
-    console.log(obj);
+    console.log (err.parsedBody.cognito[':username']);
+    var obj = (err.parsedBody);
+    console.log('OBJEKT', obj);
+    //var uznevim = obj.cognito[':username'];
+    //console.log('Uz nevim: ', uznevim);
   }else{
     console.log(verifiedJwt); // Will contain the header and body
   }
