@@ -8,10 +8,12 @@ var zkouska = event.headers;
 var token = zkouska.sectoken;
 console.log('token: ', token);
 
-var signingKey = '';
 nJwt.verify(token,"secret",function(err,verifiedJwt){
   if(err){
-    console.log(err); // Token has expired, has been tampered with, etc
+    console.log('CHYBA', err); // Token has expired, has been tampered with, etc
+    console.log (err.parsedBody);
+    var obj = JSON.parse(err);
+    console.log(obj);
   }else{
     console.log(verifiedJwt); // Will contain the header and body
   }
