@@ -11,9 +11,13 @@ console.log('token: ', token);
 nJwt.verify(token,"secret",function(err,verifiedJwt){
   if(err){
     console.log('CHYBA', err); // Token has expired, has been tampered with, etc
-    console.log (err.parsedBody.cognito[':username']);
-    var obj = (err.parsedBody);
-    console.log('OBJEKT', obj);
+
+    console.log(err.parsedBody['cognito:username']);
+    var user = err.parsedBody['cognito:username'];
+    console.log(user);
+    //console.log (err.parsedBody.cognito[':username']);
+    //var obj = (err.parsedBody);
+    //console.log('OBJEKT', obj);
     //var uznevim = obj.cognito[':username'];
     //console.log('Uz nevim: ', uznevim);
   }else{
