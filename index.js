@@ -15,11 +15,14 @@ nJwt.verify(token,"secret",function(err,verifiedJwt){
     console.log(err.parsedBody['cognito:username']);
     var user = err.parsedBody['cognito:username'];
     console.log(user);
-    //console.log (err.parsedBody.cognito[':username']);
-    //var obj = (err.parsedBody);
-    //console.log('OBJEKT', obj);
-    //var uznevim = obj.cognito[':username'];
-    //console.log('Uz nevim: ', uznevim);
+    docClient.put(params, function(err, data) {
+           if (err) {
+               console.log(err);
+               console.error("Unable to add new items from user ", incoming.user, ". Error JSON:", JSON.stringify(err, null, 2));
+           } else {
+               console.log("Request by user", incoming.user, " was successfully added.");
+           }
+        });
   }else{
     console.log(verifiedJwt); // Will contain the header and body
   }
@@ -52,13 +55,6 @@ var params = {
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-docClient.put(params, function(err, data) {
-       if (err) {
-           console.log(err);
-           console.error("Unable to add new items from user ", incoming.user, ". Error JSON:", JSON.stringify(err, null, 2));
-       } else {
-           console.log("Request by user", incoming.user, " was successfully added.");
-       }
-    });
+
 
 };
