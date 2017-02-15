@@ -1,6 +1,10 @@
 {
-  "user" : "qwertasdfg",
-  "name" : "davesade",
+  "user" : "fromfacebooklike",
+  "name" : "goliash",
   "card1" : "rock",
+  "card2" : "paper",
+  "card3" : "scissors",
+  "card4" : "lizard",
+  "card5" : "spock",
   "fightflag" : 1
 }
