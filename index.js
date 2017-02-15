@@ -1,6 +1,13 @@
 var AWS = require("aws-sdk");
+var nJwt = require('njwt');
 
 exports.handler = (event, context, callback) => {
+
+console.log('Request Headers:', event.headers);
+var zkouska = event.headers;
+var token = zkouska.sectoken;
+console.log('token: ', token);
+nJwt.verify(token, "secret", 'HS512');
 
 AWS.config.update({
   region: "eu-central-1",
@@ -8,9 +15,9 @@ AWS.config.update({
 });
 
 var dynamodb = new AWS.DynamoDB();
-
+console.log("Tohle je v contextu: ", context);
 var incoming = event;
-console.log(incoming);
+console.log("Tohle je v eventu: ", incoming);
 
 // Params validation goes here - to check, if user is not sending cards out of range.
 var params = {
