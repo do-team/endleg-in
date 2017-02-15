@@ -1,5 +1,6 @@
 var AWS = require("aws-sdk");
 var nJwt = require('njwt');
+var JSON = require('json2');
 
 exports.handler = (event, context, callback) => {
 
