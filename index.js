@@ -1,5 +1,4 @@
 var AWS = require("aws-sdk");
-var fs = require('fs');
 
 exports.handler = (event, context, callback) => {
 
@@ -10,11 +9,12 @@ AWS.config.update({
 
 var dynamodb = new AWS.DynamoDB();
 
-var incoming = JSON.parse(fs.readFileSync('testevent.json', 'utf-8'));
+var incoming = event;
 console.log(incoming);
 
+// Params validation goes here - to check, if user is not sending cards out of range.
 var params = {
-        TableName: "users",
+        TableName: "endleg-main",
         Item: {
             "user": incoming.user,
             "name": incoming.name,
@@ -23,7 +23,7 @@ var params = {
             "card3": incoming.card3,
             "card4": incoming.card4,
             "card5": incoming.card5,
-            "fighflag": incoming.fightflag
+            "fightflag": incoming.fightflag
         }
     };
 
