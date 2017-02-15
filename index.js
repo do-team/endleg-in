@@ -8,8 +8,14 @@ var zkouska = event.headers;
 var token = zkouska.sectoken;
 console.log('token: ', token);
 
-var budouciusername = nJwt.verify(token, "secret", 'HS512');
-console.log(budouciusername.cognito:username);
+var signingKey = '';
+nJwt.verify(token,signingKey,function(err,verifiedJwt){
+  if(err){
+    console.log(err); // Token has expired, has been tampered with, etc
+  }else{
+    console.log(verifiedJwt); // Will contain the header and body
+  }
+});
 
 AWS.config.update({
   region: "eu-central-1",
