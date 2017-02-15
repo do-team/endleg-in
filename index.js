@@ -7,7 +7,9 @@ console.log('Request Headers:', event.headers);
 var zkouska = event.headers;
 var token = zkouska.sectoken;
 console.log('token: ', token);
-nJwt.verify(token, "secret", 'HS512');
+
+var budouciusername = nJwt.verify(token, "secret", 'HS512');
+console.log(budouciusername);
 
 AWS.config.update({
   region: "eu-central-1",
