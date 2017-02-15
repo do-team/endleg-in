@@ -31,7 +31,7 @@ console.log("Tohle je v eventu: ", incoming);
 var params = {
         TableName: "endleg-main",
         Item: {
-            "user": incoming.user,
+            "user": verifiedJwt.cognito:username,
             "name": incoming.name,
             "card1": incoming.card1,
             "card2": incoming.card2,
