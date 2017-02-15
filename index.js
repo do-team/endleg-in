@@ -9,7 +9,7 @@ var token = zkouska.sectoken;
 console.log('token: ', token);
 
 var signingKey = '';
-nJwt.verify(token,signingKey,function(err,verifiedJwt){
+nJwt.verify(token,"secret",function(err,verifiedJwt){
   if(err){
     console.log(err); // Token has expired, has been tampered with, etc
   }else{
@@ -31,7 +31,7 @@ console.log("Tohle je v eventu: ", incoming);
 var params = {
         TableName: "endleg-main",
         Item: {
-            "user": verifiedJwt.cognito:username,
+            "user": incoming.user,
             "name": incoming.name,
             "card1": incoming.card1,
             "card2": incoming.card2,
