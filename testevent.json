@@ -5,6 +5,5 @@
   "card2" : "paper",
   "card3" : "scissors",
   "card4" : "lizard",
-  "card5" : "spock",
-  "fightflag" : 1
+  "card5" : "spock"
 }

@@ -23,7 +23,7 @@ var params = {
             "card3": incoming.card3,
             "card4": incoming.card4,
             "card5": incoming.card5,
-            "fightflag": incoming.fightflag
+            "fightflag": 1
         }
     };
 
