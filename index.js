@@ -21,10 +21,10 @@ exports.handler = (event, context, callback) => {
 
     nJwt.verify(token, "secret", function(err, verifiedJwt) {
             if (err) {
-                console.log('CHYBA', err); // Token has expired, has been tampered with, etc
+                console.log('Error - but actually it will go trough...', err); // Token has expired, has been tampered with, etc
                 //console.log(err.parsedBody['cognito:username']);
                 var user = err.parsedBody['cognito:username'];
-                console.log(user);
+                console.log(user); //Extracted username from the hash.
                 // Params validation goes here - to check, if user is not sending cards out of range.
                 var validCards = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
                 console.log('Valid cards: ', validCards);
@@ -35,7 +35,7 @@ exports.handler = (event, context, callback) => {
                         return validCards.indexOf(v) >= 0;
                     });
                 };
-                if (validCards.indexOf(event.card1 > -1) {
+                if (validCards.indexOf(event.card1) > -1) {
                     //Cards validated...
 
 
@@ -66,7 +66,7 @@ exports.handler = (event, context, callback) => {
                 }
 
             } else {
-                console.log('All OK decrypted.');
+                console.log('All OK decrypted. That also means, it will do nothing with Dynamo :).');
                 console.log(verifiedJwt); // Will contain the header and body
         }
 
