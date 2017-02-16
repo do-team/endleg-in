@@ -7,12 +7,8 @@ AWS.config.update({
 });
 
 var dynamodb = new AWS.DynamoDB();
-console.log("Tohle je v contextu: ", context);
-var incoming = event;
-console.log("Tohle je v eventu: ", incoming);
-
-
-
+//console.log("Tohle je v contextu: ", context);
+console.log("Tohle je v eventu: ", event);
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 
@@ -20,13 +16,12 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 console.log('Request Headers:', event.headers);
 var zkouska = event.headers;
 var token = zkouska.sectoken;
+var secret = 'secret';
 console.log('token: ', token);
-
-nJwt.verify(token,"secret",function(err,verifiedJwt){
+nJwt.verify(token,secret,function(err,verifiedJwt){
   if(err){
     console.log('CHYBA', err); // Token has expired, has been tampered with, etc
-
-    console.log(err.parsedBody['cognito:username']);
+    //console.log(err.parsedBody['cognito:username']);
     var user = err.parsedBody['cognito:username'];
     console.log(user);
     // Params validation goes here - to check, if user is not sending cards out of range.
@@ -34,12 +29,12 @@ var params = {
         TableName: "endleg-main",
         Item: {
             "user": user,
-            "name": incoming.name,
-            "card1": incoming.card1,
-            "card2": incoming.card2,
-            "card3": incoming.card3,
-            "card4": incoming.card4,
-            "card5": incoming.card5,
+            "name": event.name,
+            "card1": event.card1,
+            "card2": event.card2,
+            "card3": event.card3,
+            "card4": event.card4,
+            "card5": event.card5,
             "fightflag": 1
         }
     };
@@ -53,6 +48,7 @@ var params = {
         });
   }else{
     console.log(verifiedJwt); // Will contain the header and body
+     console.log('All OK decrypted');
   }
 });
 
