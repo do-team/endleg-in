@@ -24,13 +24,19 @@ exports.handler = (event, context, callback) => {
                 var sentCards = [event.body.card1, event.body.card2, event.body.card3, event.body.card4, event.body.card5];
                 console.log('Cards sent: ', sentCards);
 
-                var validate = function (validCards, sentCards) {
-                    return sentCards.some(function (v) {
-                        return validCards.indexOf(v) >= 0;
-                    });
-                };
-                console.log('Validation: ', validate);
-                if (validCards.indexOf(event.body.card1) > -1) {
+                var findOne = function (haystack, arr) {
+                    return arr.some(function (v) {
+                        return haystack.indexOf(v) >= 0;
+                        });
+                    };
+                if (!findOne(validCards, sentCards)){
+                    console.log('Vse je validni.');
+
+                } else { console.log('Neco neni v poradku');
+
+                }
+
+                if (validCards.indexOf(event.body.card1 || event.body.card2 || event.body.card3 || event.body.card4 || event.body.card5) > -1) {
                     //Cards validated...
                     var params = {
                         TableName: "endleg-main",
