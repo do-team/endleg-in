@@ -16,7 +16,7 @@ exports.handler = (event, context, callback) => {
 
                 console.log('Error - but actually it will go trough...', err); // Token has expired, has been tampered with, etc
                 var user = err.parsedBody['cognito:username'];
-                console.log(user); //Extracted username from the hash.
+                //console.log(user); //Extracted username from the hash.
 
                 // Params validation goes here - to check, if user is not sending cards out of range.
                 var validCards = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
@@ -30,7 +30,7 @@ exports.handler = (event, context, callback) => {
                     });
                 };
 
-                if (validCards.indexOf(event.card1) > -1) {
+                if (validCards.indexOf(event.body.card1) > -1) {
                     //Cards validated...
                     var params = {
                         TableName: "endleg-main",
