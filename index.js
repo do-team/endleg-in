@@ -25,8 +25,9 @@ exports.handler = (event, context, callback) => {
                 // Params validation goes here - to check, if user is not sending cards out of range.
                 var validCards = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
                 console.log('Valid cards: ', validCards);
-                var sentCards = [event.card1, event.card2, event.card3, event.card4, event.card5];
-                console.log('Cards sent: ', event.card1);
+                //var sentCards = [event.card1, event.card2, event.card3, event.card4, event.card5];
+                var sentCards = [event.card1];
+                console.log('Cards sent: ', sentCards);
                 var validate = function (validCards, sentCards) {
                     return sentCards.some(function (v) {
                         return validCards.indexOf(v) >= 0;
