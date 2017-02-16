@@ -27,8 +27,15 @@ exports.handler = (event, context, callback) => {
                 console.log(user);
                 // Params validation goes here - to check, if user is not sending cards out of range.
                 var validCards = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
-
-                if (validCards.indexOf(event.card1 || event.card2 || event.card3 || event.card4 || event.card5) > -1) {
+                console.log('Valid cards: ', validCards);
+                var sentCards = [event.card1, event.card2, event.card3, event.card4, event.card5];
+                console.log('Cards sent: ', sentCards);
+                var validate = function (validCards, sentCards) {
+                    return sentCards.some(function (v) {
+                        return validCards.indexOf(v) >= 0;
+                    });
+                };
+                if (validCards.indexOf(event.card1 > -1) {
                     //Cards validated...
 
 
@@ -56,7 +63,7 @@ exports.handler = (event, context, callback) => {
                 } else {
 
                     console.log('One of cards is not valid! Rejecting...');
-                };
+                }
 
             } else {
                 console.log('All OK decrypted.');
