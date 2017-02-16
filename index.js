@@ -11,8 +11,8 @@ exports.handler = (event, context, callback) => {
     //console.log("Tohle je v eventu: ", event);
     var docClient = new AWS.DynamoDB.DocumentClient();
     //console.log('Request Headers:', event.headers);
-    var zkouska = event.headers;
-    var token = zkouska.sectoken;
+    //var zkouska = event.headers;
+    var token = event.headers.sectoken;
     var signingKey = 'secret';
     console.log('token: ', token);
 
