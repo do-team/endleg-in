@@ -26,7 +26,7 @@ exports.handler = (event, context, callback) => {
                 var validCards = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
                 console.log('Valid cards: ', validCards);
                 //var sentCards = [event.card1, event.card2, event.card3, event.card4, event.card5];
-                var sentCards = [event.card1];
+                var sentCards = event.card1;
                 console.log('Cards sent: ', sentCards);
                 var validate = function (validCards, sentCards) {
                     return sentCards.some(function (v) {
