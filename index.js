@@ -55,7 +55,7 @@ exports.handler = (event, context, callback) => {
                     });
                 } else {
 
-                    console.log('One of cards is not valid! Rejecting...''All OK decrypted');
+                    console.log('One of cards is not valid! Rejecting...');
                 };
 
             } else {
