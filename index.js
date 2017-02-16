@@ -18,7 +18,8 @@ var zkouska = event.headers;
 var token = zkouska.sectoken;
 var secret = 'secret';
 console.log('token: ', token);
-nJwt.verify(token,'secret',function(err,verifiedJwt){
+
+nJwt.verify(token,secret,'HS256',function(err,verifiedJwt){
   if(err){
     console.log('CHYBA', err); // Token has expired, has been tampered with, etc
     //console.log(err.parsedBody['cognito:username']);
