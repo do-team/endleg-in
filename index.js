@@ -54,12 +54,13 @@ exports.handler = (event, context, callback) => {
                         }
                     });
                 } else {
-                    console.log(verifiedJwt); // Will contain the header and body
-                    console.log('All OK decrypted');
+
+                    console.log('One of cards is not valid! Rejecting...''All OK decrypted');
                 };
 
             } else {
-                console.log)('One of cards is not valid! Rejecting...')
+                console.log('All OK decrypted.');
+                console.log(verifiedJwt); // Will contain the header and body
         }
 
 
