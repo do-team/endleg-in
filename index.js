@@ -16,7 +16,7 @@ exports.handler = (event, context, callback) => {
     var signingKey = 'secret';
     console.log('token: ', token);
 
-    nJwt.verify(token, signingKey, 'HSA256', function(err, verifiedJwt) {
+    nJwt.verify(token, signingKey, function(err, verifiedJwt) {
             if (err) {
                 console.log('Error - but actually it will go trough...', err); // Token has expired, has been tampered with, etc
                 //console.log(err.parsedBody['cognito:username']);
