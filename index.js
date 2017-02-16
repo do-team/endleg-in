@@ -8,18 +8,15 @@ exports.handler = (event, context, callback) => {
 
     var dynamodb = new AWS.DynamoDB();
     //console.log("Tohle je v contextu: ", context);
-    console.log("Tohle je v eventu: ", event);
+    //console.log("Tohle je v eventu: ", event);
     var docClient = new AWS.DynamoDB.DocumentClient();
-
-
-
-    console.log('Request Headers:', event.headers);
+    //console.log('Request Headers:', event.headers);
     var zkouska = event.headers;
     var token = zkouska.sectoken;
     var signingKey = 'secret';
     console.log('token: ', token);
 
-    nJwt.verify(token, "secret", function(err, verifiedJwt) {
+    nJwt.verify(token, signingKey, 'HSA256', function(err, verifiedJwt) {
             if (err) {
                 console.log('Error - but actually it will go trough...', err); // Token has expired, has been tampered with, etc
                 //console.log(err.parsedBody['cognito:username']);
@@ -29,7 +26,7 @@ exports.handler = (event, context, callback) => {
                 var validCards = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
                 console.log('Valid cards: ', validCards);
                 var sentCards = [event.card1, event.card2, event.card3, event.card4, event.card5];
-                console.log('Cards sent: ', sentCards);
+                console.log('Cards sent: ', event.card1);
                 var validate = function (validCards, sentCards) {
                     return sentCards.some(function (v) {
                         return validCards.indexOf(v) >= 0;
@@ -37,8 +34,6 @@ exports.handler = (event, context, callback) => {
                 };
                 if (validCards.indexOf(event.card1) > -1) {
                     //Cards validated...
-
-
                     var params = {
                         TableName: "endleg-main",
                         Item: {
@@ -61,18 +56,11 @@ exports.handler = (event, context, callback) => {
                         }
                     });
                 } else {
-
                     console.log('One of cards is not valid! Rejecting...');
                 }
-
             } else {
                 console.log('All OK decrypted. That also means, it will do nothing with Dynamo :).');
                 console.log(verifiedJwt); // Will contain the header and body
         }
-
-
     });
-
-
-
 };
