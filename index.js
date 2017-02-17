@@ -24,18 +24,19 @@ exports.handler = (event, context, callback) => {
                 var sentCards = [event.body.card1, event.body.card2, event.body.card3, event.body.card4, event.body.card5];
                 console.log('Cards sent: ', sentCards);
 
-                var findOne = function (haystack, arr) {
-                    return arr.some(function (v) {
-                        return haystack.indexOf(v) >= 0;
-                        });
-                    };
-                if (!findOne(validCards, sentCards)){
-                    console.log('Vse je validni.');
-
-                } else { console.log('Neco neni v poradku');
-
+                var valid = true;
+                for (var i = 0; i < sentCards.length; i++) {
+                   found = false;
+                    if (validCards.indexOf(sentCards[i]) > -1) {
+                        found = true;
+                        break;
+                    }
+                   if (!found) {
+                    valid = false;
+                   }
                 }
-
+                if (valid = true) { console.log('All validated OK.'); }
+                    else { console.log('INVALID, stopping the engine...'); }
                 if (validCards.indexOf(event.body.card1,event.body.card2,event.body.card3,event.body.card4,event.body.card5) > -1) {
                     //Cards validated...
                     var params = {
