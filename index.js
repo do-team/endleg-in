@@ -36,7 +36,7 @@ exports.handler = (event, context, callback) => {
 
                 }
 
-                if (validCards.indexOf(event.body.card1 || event.body.card2 || event.body.card3 || event.body.card4 || event.body.card5) > -1) {
+                if (validCards.indexOf(event.body.card1,event.body.card2,event.body.card3,event.body.card4,event.body.card5) > -1) {
                     //Cards validated...
                     var params = {
                         TableName: "endleg-main",
