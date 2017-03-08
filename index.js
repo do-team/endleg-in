@@ -35,9 +35,9 @@ exports.handler = (event, context, callback) => {
                     valid = false;
                    }
                 }
-                if (valid = true) { console.log('All validated OK.'); }
-                    else { console.log('INVALID, stopping the engine...'); }
-                if (validCards.indexOf(event.body.card1,event.body.card2,event.body.card3,event.body.card4,event.body.card5) > -1) {
+                if (valid === false) { console.log('Something is wrong!'); return; }
+                console.log('Alles gute!');
+
                     //Cards validated...
                     var params = {
                         TableName: "endleg-main",
@@ -62,9 +62,8 @@ exports.handler = (event, context, callback) => {
                             console.log("Request by user", user, " was successfully added.");
                         }
                     });
-                } else {
-                    console.log('One of cards is not valid! Rejecting...');
-                }
+
+
             } else {
                 console.log('All OK decrypted. That also means, it will do nothing with Dynamo :).');
                 console.log(verifiedJwt); // Will contain the header and body
