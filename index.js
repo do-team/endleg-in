@@ -22,7 +22,7 @@ exports.handler = (event, context, callback) => {
 
                 // Card validation goes here - to check, if user is not sending cards out of allowed range.
                 var validCards = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
-                console.log('Valid cards: ', validCards);
+                console.log('Allowed cards: ', validCards);
                 var sentCards = [cards.card1, cards.card2, cards.card3, cards.card4, cards.card5];
                 console.log('Cards sent: ', sentCards);
 
@@ -37,7 +37,11 @@ exports.handler = (event, context, callback) => {
                     valid = false;
                    }
                 }
-                if (valid === false) { console.log('Invalid card found! Returning with error.'); return; }
+                if (valid === false) {
+                    console.log('Invalid card found! Returning with error.');
+                    var err = 'Invalid card found!';
+                    callback(err);
+                    }
                 console.log('Alles gute!');
 
                     //Cards validated...
