@@ -6,6 +6,9 @@ exports.handler = (event, context, callback) => {
         endpoint: "dynamodb.eu-central-1.amazonaws.com"
     });
     var token = event.headers.sectoken;
+    // Sent cards are now mapped from incoming JSON string
+    var cards = (JSON.parse(event.body));
+
     var signingKey = 'secret';
     console.log('token: ', token);
 
@@ -15,13 +18,13 @@ exports.handler = (event, context, callback) => {
             if (err) {
 
                 console.log('Error - but actually it will go trough...', err); // Token has expired, has been tampered with, etc
+                //Extracted username from the hash.
                 var user = err.parsedBody['cognito:username'];
-                //console.log(user); //Extracted username from the hash.
 
-                // Params validation goes here - to check, if user is not sending cards out of range.
+                // Card validation goes here - to check, if user is not sending cards out of allowed range.
                 var validCards = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
                 console.log('Valid cards: ', validCards);
-                var sentCards = [event.body.card1, event.body.card2, event.body.card3, event.body.card4, event.body.card5];
+                var sentCards = [cards.card1, cards.card2, cards.card3, cards.card4, cards.card5];
                 console.log('Cards sent: ', sentCards);
 
                 var valid = true;
@@ -35,20 +38,20 @@ exports.handler = (event, context, callback) => {
                     valid = false;
                    }
                 }
-                if (valid = true) { console.log('All validated OK.'); }
-                    else { console.log('INVALID, stopping the engine...'); }
-                if (validCards.indexOf(event.body.card1,event.body.card2,event.body.card3,event.body.card4,event.body.card5) > -1) {
+                if (valid === false) { console.log('Invalid card found! Returning with error.'); return; }
+                console.log('Alles gute!');
+
                     //Cards validated...
                     var params = {
                         TableName: "endleg-main",
                         Item: {
                             "user": user,
                             "name": event.body.name,
-                            "card1": event.body.card1,
-                            "card2": event.body.card2,
-                            "card3": event.body.card3,
-                            "card4": event.body.card4,
-                            "card5": event.body.card5,
+                            "card1": cards.card1,
+                            "card2": cards.card2,
+                            "card3": cards.card3,
+                            "card4": cards.card4,
+                            "card5": cards.card5,
                             "fightflag": 1
                         }
                     };
@@ -62,9 +65,8 @@ exports.handler = (event, context, callback) => {
                             console.log("Request by user", user, " was successfully added.");
                         }
                     });
-                } else {
-                    console.log('One of cards is not valid! Rejecting...');
-                }
+
+
             } else {
                 console.log('All OK decrypted. That also means, it will do nothing with Dynamo :).');
                 console.log(verifiedJwt); // Will contain the header and body
