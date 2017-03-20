@@ -6,6 +6,8 @@ exports.handler = (event, context, callback) => {
         endpoint: "dynamodb.eu-central-1.amazonaws.com"
     });
     var token = event.headers.sectoken;
+    // Sent cards are now mapped from incoming JSON string
+    var cards = (JSON.parse(event.body));
     var signingKey = 'secret';
     console.log('token: ', token);
 
